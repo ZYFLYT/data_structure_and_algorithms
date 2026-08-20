@@ -40,6 +40,7 @@ int main()
     cout << *a << " " << *b << endl;
 
     // 释放指针内存
+    ;
     delete a;
     delete b;
 
