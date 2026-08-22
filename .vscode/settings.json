@@ -1,0 +1,6 @@
+{
+    "code-runner.executorMap": {
+        "cpp": "cd $workspaceRoot && g++ $fileName -o build/$fileNameWithoutExt && ./build/$fileNameWithoutExt"
+    },
+    "code-runner.runInTerminal": true
+}
