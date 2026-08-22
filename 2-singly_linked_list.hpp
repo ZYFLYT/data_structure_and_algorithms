@@ -30,4 +30,10 @@ public:
     {
         clear();
     }
+
+    // 基本访问函数
+    // 参数的 const：修饰传入的形参，保护函数内部不要修改传入过来的实参。
+    // 成员函数尾部 const修饰this 指针（当前类对象本身），保护本类的成员变量不被修改。
+    int getSize() const { return size; }
+    int isEmpty() const { return size == 0; }
 };
