@@ -1,6 +1,13 @@
 {
+    // "code-runner.executorMap": {
+    //     "cpp": "cd $workspaceRoot && g++ $fileName -o build/$fileNameWithoutExt && ./build/$fileNameWithoutExt"
+    // },
     "code-runner.executorMap": {
-        "cpp": "cd $workspaceRoot && g++ $fileName -o build/$fileNameWithoutExt && ./build/$fileNameWithoutExt"
+    "cpp": "cd $workspaceRoot && g++ $fileName -o build\\$fileNameWithoutExt.exe && build\\$fileNameWithoutExt.exe"
     },
-    "code-runner.runInTerminal": true
+    "code-runner.runInTerminal": true,
+    // 是否开启提示
+    "github.copilot.inlineSuggest.enabled": false,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "editor.inlineSuggest.enabled": false
 }
