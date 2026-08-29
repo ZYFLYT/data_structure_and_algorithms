@@ -3,7 +3,7 @@
 #include <stdexcept>
 using namespace std;
 
-template <template T>
+template <typename T>
 class DoubleLinkedList
 {
 private:
@@ -20,8 +20,28 @@ private:
             : data(value), prev(pre), next(nex) {}
     };
 
-    Node *sentinel; // 这是一个指针，指向堆上分配的哨兵节点
-    int size;       // 有效节点的个数（哨兵不算）
+    Node *head; // 指向第一个节点（如果链表为空，则为 nullptr）
+    Node *tail; // 指向最后一个节点（如果链表为空，则为 nullptr）
+    int size;   // 有效节点的个数
 
 public:
-}
+    DoubleLinkedList() : head(nullptr), tail(nullptr), size(0) {}
+
+    ~DoubleLinkedList() { clear(); }
+
+    void clear()
+    {
+        Node *current = head;
+        while (current != nullptr)
+        {
+            Node *toDel = current;
+            current = current->next;
+            delete current;
+        }
+        head = tail = nullptr;
+        size = 0;
+    }
+
+    int getSize() const { return size; }
+    int isEmpty() const { return size == 0; }
+};
