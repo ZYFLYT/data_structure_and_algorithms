@@ -44,4 +44,74 @@ public:
 
     int getSize() const { return size; }
     int isEmpty() const { return size == 0; }
+
+    // 头插
+    void push_front(const T &value)
+    {
+        Node *newNode = new Node(value, nullptr, head);
+        if (head != nullptr)
+        {
+            head->prev = newNode;
+        }
+        else
+        {
+            tail = newNode;
+        }
+        head = newNode;
+        size++;
+    }
+
+    // 尾插
+    void push_back(const T &value)
+    {
+        Node newNode = new Node(value, tail, nullptr);
+        if (tail != nullptr)
+        {
+            tail->next = newNode;
+        }
+        else
+        {
+            head = newNode;
+        }
+        tail = newNode;
+        size++;
+    }
+
+    // 头删
+    void pop_front()
+    {
+        if (isEmpty())
+            throw runtime_error("链表为空");
+        Node *toDel = head;
+        head = head->next;
+        if (head != nullptr)
+        {
+            head->prev = nullptr;
+        }
+        else
+        {
+            tail = nullptr;
+        }
+        delete toDel;
+        size--;
+    }
+
+    // 尾删
+    void pop_back()
+    {
+        if (isEmpty())
+            throw runtime_error("链表为空");
+        Node *toDel = tail;
+        tail = tail->prev;
+        if (tail != nullptr)
+        {
+            tail->next = nullptr;
+        }
+        else
+        {
+            head = nullptr;
+        }
+        delete toDel;
+        size--;
+    }
 };
