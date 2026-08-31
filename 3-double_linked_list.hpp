@@ -114,4 +114,29 @@ public:
         delete toDel;
         size--;
     }
+
+    // 在指定位置插入
+    void insert(int pos, const T &value)
+    {
+        if (pos < 0 || pos > size)
+            throw out_of_range("插入位置越界");
+        if (pos == 0)
+        {
+            push_front(value);
+            return;
+        }
+        if (pos == size)
+        {
+            push_back(value);
+            return;
+        }
+        Node *cur = head;
+        for (int i = 0; i < pos; i++)
+            cur = cur->next;
+        Node *pre = cur->prev;
+        Node *newNode = new Node(value, pre, cur);
+        pre->next = newNode;
+        cur->pre = newNode;
+        size++;
+    }
 };
