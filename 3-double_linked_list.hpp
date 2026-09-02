@@ -36,7 +36,7 @@ public:
         {
             Node *toDel = current;
             current = current->next;
-            delete current;
+            delete toDel;
         }
         head = tail = nullptr;
         size = 0;
@@ -64,7 +64,7 @@ public:
     // 尾插
     void push_back(const T &value)
     {
-        Node newNode = new Node(value, tail, nullptr);
+        Node *newNode = new Node(value, tail, nullptr);
         if (tail != nullptr)
         {
             tail->next = newNode;
@@ -136,7 +136,61 @@ public:
         Node *pre = cur->prev;
         Node *newNode = new Node(value, pre, cur);
         pre->next = newNode;
-        cur->pre = newNode;
+        cur->prev = newNode;
         size++;
+    }
+
+    // 删除指定位置节点
+    void remove(int pos)
+    {
+        if (pos < 0 || pos >= size)
+            throw out_of_range("删除的位置越界");
+        if (pos == 0)
+        {
+            pop_front();
+            return;
+        }
+        if (pos == size - 1)
+        {
+            pop_back();
+            return;
+        }
+        Node *toDel = head;
+        for (int i = 0; i < = pos; i++)
+            toDel = toDel->next;
+        Node *pre = toDel->prev;
+        Node *nex = toDel->next;
+        pre->next = nex;
+        nex->prev = pre;
+        delete toDel;
+        size--;
+    }
+
+    // 按值删除第一个匹配项
+    bool removeByValue(const T &value)
+    {
+        Node *current = head;
+        while (current != nullptr)
+        {
+            if (current->data == value)
+            {
+                if (current == head)
+                    pop_front();
+                else if (current == tail)
+                    pop_back();
+                else
+                {
+                    Node *pre = toDel->prev;
+                    Node *nex = toDel->next;
+                    pre->next = nex;
+                    nex->prev = pre;
+                    delete current;
+                    size--;
+                }
+                return true;
+            }
+            current = current->next;
+        }
+        return false;
     }
 };
