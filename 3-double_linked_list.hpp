@@ -43,7 +43,7 @@ public:
     }
 
     int getSize() const { return size; }
-    int isEmpty() const { return size == 0; }
+    bool isEmpty() const { return size == 0; }
 
     // 头插
     void push_front(const T &value)
@@ -156,7 +156,7 @@ public:
             return;
         }
         Node *toDel = head;
-        for (int i = 0; i < = pos; i++)
+        for (int i = 0; i < pos; i++)
             toDel = toDel->next;
         Node *pre = toDel->prev;
         Node *nex = toDel->next;
@@ -180,8 +180,8 @@ public:
                     pop_back();
                 else
                 {
-                    Node *pre = toDel->prev;
-                    Node *nex = toDel->next;
+                    Node *pre = current->prev;
+                    Node *nex = current->next;
                     pre->next = nex;
                     nex->prev = pre;
                     delete current;
@@ -192,5 +192,67 @@ public:
             current = current->next;
         }
         return false;
+    }
+
+    // 查找(返回索引)
+    int find(const T &value) const
+    {
+        Node *cur = head;
+        int idx = 0;
+        while (cur != nullptr)
+        {
+            if (cur->data == value)
+            {
+                return idx;
+            }
+            cur = cur->next;
+            idx++;
+        }
+        return -1;
+    }
+
+    // 原地反转
+    void reverse()
+    {
+        Node *pre = nullptr;
+        Node *cur = head;
+        Node *nex = nullptr;
+        while (cur != nullptr)
+        {
+            nex = cur->next;
+            cur->next = pre;
+            cur->prev = nex;
+            pre = cur;
+            cur = nex;
+        }
+        Node *temp = head;
+        head = tail;
+        tail = temp;
+    }
+
+    // 正向打印
+    void print()
+    {
+        Node *cur = head;
+        cout << "[ ";
+        while (cur != nullptr)
+        {
+            cout << cur->data << " ";
+            cur = cur->next;
+        }
+        cout << " ]" << endl;
+    }
+
+    // 反向打印
+    void printReverse()
+    {
+        Node *cur = tail;
+        cout << "[反向][ ";
+        while (cur != nullptr)
+        {
+            cout << cur->data << " ";
+            cur = cur->prev;
+        }
+        cout << " ]" << endl;
     }
 };
