@@ -16,9 +16,8 @@ typedef struct
 } DynList;
 
 // 一、逆置
-void Reverse(SqList &L)
+void Reverse(SqList &L, int from, int to)
 {
-    int from = 0, to = L.length - 1;
     while (from < to)
     {
         int t = L.data[from];
@@ -165,4 +164,23 @@ void Partition(SqList &L)
     L.data[left] = pivot;
 }
 
-// 循环左移 p 位
+// 循环左移 p 位，这个思路非常巧妙，仔细理解
+void LeftRotate(SqList &L, int p)
+{
+    if (L.length == 0)
+        return;
+    if (p == 0)
+        return;
+    Reverse(L, 0, p - 1);
+    Reverse(L, p, L.length - 1);
+    Reverse(L, 0, L.length - 1);
+}
+
+// 循环右移p，利用左移
+void RightRotate(SqList &L, int p)
+{
+    int x = L.length - p;
+    if (L.length == 0)
+        return;
+    LeftRotate(L, x);
+}
