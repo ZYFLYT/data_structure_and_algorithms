@@ -96,3 +96,37 @@ bool ListInsert(DynList &L, int i, ElemType e)
     L.length++;
     return true;
 }
+
+bool ListDelete(DynList &L, int i, ElemType &e)
+{
+    if (i < 1 || i > L.length)
+        return false;
+    e = L.data[i - 1];
+    for (int j = i; j < L.length; j++)
+    {
+        L.data[j - 1] = L.data[j];
+    }
+    L.length--;
+    return true;
+}
+
+void ListTraverse(DynList &L)
+{
+    for (int i = 0; i < L.length; i++)
+    {
+        cout << L.data[i] << " " << endl;
+    }
+}
+
+// 扩容
+void IncreaseSize(DynList &L, int len)
+{
+    ElemType *p = L.data;
+    L.data = new ElemType[L.maxSize + len];
+    for (int i = 0; i < L.length; i++)
+    {
+        L.data[i] = p[i];
+    }
+    delete[] p;
+    L.maxSize += len;
+}
